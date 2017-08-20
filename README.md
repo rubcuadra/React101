@@ -1,4 +1,6 @@
-```cd anyProject
+```
+cd anyProject
 npm install
-npm start```
+npm start
+```
 **Then go to http://localhost:8080**
