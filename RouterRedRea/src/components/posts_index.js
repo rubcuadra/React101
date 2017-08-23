@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchPosts} from '../actions';
 import {Link} from 'react-router-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class PostsIndex extends Component{
 	componentDidMount(){
@@ -19,6 +20,12 @@ class PostsIndex extends Component{
 	}
 
 	render(){
+		const transitionOptions = {
+			transitionName: 'fade' , //Este sera el nombre de la css class
+			transitionEnterTimeout: 500,
+			transitionLeaveTimeout: 500
+		};
+
 		return (
 			<div>
 			  <div className="text-xs-right">
@@ -28,7 +35,9 @@ class PostsIndex extends Component{
 			  </div>
 			  <h3>Posts</h3>
 			  <ul className="list-group">
-			  	{this.renderPosts()}
+			  	<ReactCSSTransitionGroup {...transitionOptions}>	
+			  	  {this.renderPosts()}
+			  	</ReactCSSTransitionGroup>
 			  </ul>
 			</div>
 		);
