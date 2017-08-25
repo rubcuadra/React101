@@ -15,9 +15,10 @@ import App from './components/app';
 const middleware = [thunk,ReduxPromise];
 const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 //const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+export const store = createStoreWithMiddleware(reducers);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={ store }>
   	<BrowserRouter>
   	  <div>
   	  	<Switch>
