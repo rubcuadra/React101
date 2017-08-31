@@ -1,26 +1,40 @@
 import axios from 'axios';
+import {
+	AUTH_USER,
+	UNAUTH_USER,
+	AUTH_ERROR
+} from './types';
 const ROOT_URL = 'http://localhost:3090';
 
-//Podriamos pasarle la history para hacer el push...
+//Debemos pasarle el push de la history...
+//Submit email/password to the server
 export function signinUser({ email, password, push }){
-	//Submit email/password to the server
-
-	//If request is gut
-		//Update state Auth:True
-		//Save token
-		//Redirect	
-
-	return function(dispatch){
+	return dispatch => {
 		//Invocamos dispatch() con una action cuando queramos
 		//Pasar un dict con los params
 		//El endpoint recibe esos dos params
 		axios.post( `${ROOT_URL}/signin`,{email,password})
 		.then(response=>{
-			console.log(response);
-			push('/');
-		}).catch(e=>{
+			dispatch({
+				type: AUTH_USER,
+				payload:{}
+			});	//Update state
+			//Save token
+			localStorage.setItem('token',response.data.token);
+			//Redirect
+			push('/feature'); 
+		})
+		.catch( () => {
 			//Show error
-			console.log(e);
+			dispatch( authError("Login error") );
 		});
-	}
+	};
 }
+
+export function authError(error){
+	return {
+		type: AUTH_ERROR,
+		payload: error
+	};
+}
+
