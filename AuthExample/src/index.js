@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Header from './components/header';
 import SignIn from './components/auth/signin';
+import SignOut from './components/auth/signout';
 import App from './components/app';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
@@ -20,6 +21,7 @@ ReactDOM.render(
   	    <Header/>
   	  	<Switch>
 	  	  	<Route path='/signin' component={ SignIn }/>
+          <Route path='/signout' component={ SignOut }/>
 	  	  	<Route path='/' component={ App }/>
   	  	</Switch>
   	  </div>
