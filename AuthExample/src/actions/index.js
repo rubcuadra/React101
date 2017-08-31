@@ -2,7 +2,7 @@ import axios from 'axios';
 const ROOT_URL = 'http://localhost:3090';
 
 //Podriamos pasarle la history para hacer el push...
-export function signinUser({email, password }){
+export function signinUser({ email, password, push }){
 	//Submit email/password to the server
 
 	//If request is gut
@@ -17,6 +17,7 @@ export function signinUser({email, password }){
 		axios.post( `${ROOT_URL}/signin`,{email,password})
 		.then(response=>{
 			console.log(response);
+			push('/');
 		}).catch(e=>{
 			//Show error
 			console.log(e);

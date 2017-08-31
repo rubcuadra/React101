@@ -6,7 +6,7 @@ class SignIn extends Component {
   handleFormSubmit({email, password}){
       console.log(email);
       console.log(password);
-      this.props.signinUser( {email,password} );
+      this.props.signinUser( {email,password, push:this.props.history.push} );
   }
 
   render() {
