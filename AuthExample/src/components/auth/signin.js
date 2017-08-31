@@ -4,9 +4,16 @@ import * as actions from '../../actions';
 
 class SignIn extends Component {
   handleFormSubmit({email, password}){
-      console.log(email);
-      console.log(password);
       this.props.signinUser( {email,password, push:this.props.history.push} );
+  }
+
+  renderAlert(){
+    if(this.props.errorMessage)
+      return (
+          <div className="alert alert-danger">
+            <strong>Oops!</strong> {this.props.errorMessage}
+          </div>
+        );
   }
 
   render() {
@@ -24,13 +31,18 @@ class SignIn extends Component {
           <input { ...password } className="form-control"/>
         </fieldset>
 
+        {this.renderAlert()}
         <button action="submit" className="btn btn-primary" >Sign in</button>
       </form>
     );
   }
 }
 
+function mapStateToProps(state){
+  return { errorMessage: state.auth.error };
+}
+
 export default reduxForm({
   form: "signin",
   fields: ['email','password']
-}, null, actions)(SignIn);
+}, mapStateToProps, actions)(SignIn);
