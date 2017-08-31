@@ -28,7 +28,7 @@ class SignIn extends Component {
 
         <fieldset className="form-group">
           <label>Password:</label>
-          <input { ...password } className="form-control"/>
+          <input { ...password } type="password" className="form-control"/>
         </fieldset>
 
         {this.renderAlert()}
