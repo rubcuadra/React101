@@ -15,10 +15,7 @@ export function signinUser({ email, password, push }){
 		//El endpoint recibe esos dos params
 		axios.post( `${ROOT_URL}/signin`,{email,password})
 		.then(response=>{
-			dispatch({
-				type: AUTH_USER,
-				payload:{}
-			});	//Update state
+			dispatch({type: AUTH_USER});	//Update state
 			//Save token
 			localStorage.setItem('token',response.data.token);
 			//Redirect
@@ -47,4 +44,18 @@ export function signoutUser(){
 	}
 }
 
+export function signUpUser({email, password, push}){
+	return dispatch=>{
+		axios.post( `${ROOT_URL}/signup`,{email,password} )
+		.then( response => {
+			dispatch({type: AUTH_USER});
+			localStorage.setItem('token',response.data.token);
+			push('/feature'); 
+		})
+
+		
+
+
+	}
+}
 
