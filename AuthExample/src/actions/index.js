@@ -59,17 +59,11 @@ export function signUpUser({email, password, push}){
 	}
 }
 
+//ReduxPromise
 export function fetchMessage(){
-	return dispatch=>{
-		axios.get(ROOT_URL,{ headers: { authorization: localStorage.getItem('token') } })
-			 .then( res=>{
-				  dispatch({
-			  				type:FETCH_MESSAGES, 
-			  				payload:res.data.message
-				  		});
-			  })
-			 .catch( res=>{
-			 	  console.log(res);
-			  });
-	}
+	const r = axios.get(ROOT_URL,{ headers: { authorization: localStorage.getItem('token') } });
+	return {
+		type:FETCH_MESSAGES, 
+		payload: r
+  	};
 }

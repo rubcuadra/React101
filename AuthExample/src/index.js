@@ -13,10 +13,12 @@ import requireAuth from './components/auth/require_auth';
 import Feature from './components/feature';
 import Welcome from './components/welcome';
 import reduxThunk from 'redux-thunk';
+import ReduxPromise from 'redux-promise';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const middlewares = [reduxThunk,ReduxPromise];
+const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 //Auth on refresh
