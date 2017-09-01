@@ -45,17 +45,16 @@ export function signoutUser(){
 }
 
 export function signUpUser({email, password, push}){
-	return dispatch=>{
+	return dispatch => {
 		axios.post( `${ROOT_URL}/signup`,{email,password} )
 		.then( response => {
 			dispatch({type: AUTH_USER});
 			localStorage.setItem('token',response.data.token);
 			push('/feature'); 
 		})
-
-		
-
-
+		.catch( response => {
+			dispatch( authError( "Email already in use" ) );
+		});
 	}
 }
 

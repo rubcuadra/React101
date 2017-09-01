@@ -9,6 +9,8 @@ import Header from './components/header';
 import SignIn from './components/auth/signin';
 import SignUp from './components/auth/signup';
 import SignOut from './components/auth/signout';
+import requireAuth from './components/auth/require_auth';
+import Feature from './components/feature';
 import App from './components/app';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
@@ -24,6 +26,7 @@ ReactDOM.render(
 	  	  	<Route path='/signin' component={ SignIn }/>
           <Route path='/signout' component={ SignOut }/>
           <Route path='/signup' component={ SignUp }/>
+          <Route path='/feature' component={ requireAuth(Feature)  }/>
 	  	  	<Route path='/' component={ App }/>
   	  	</Switch>
   	  </div>
