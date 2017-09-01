@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
 	AUTH_USER,
 	UNAUTH_USER,
-	AUTH_ERROR
+	AUTH_ERROR,
+	FETCH_MESSAGES
 } from './types';
 const ROOT_URL = 'http://localhost:3090';
 
@@ -58,3 +59,17 @@ export function signUpUser({email, password, push}){
 	}
 }
 
+export function fetchMessage(){
+	return dispatch=>{
+		axios.get(ROOT_URL,{ headers: { authorization: localStorage.getItem('token') } })
+			 .then( res=>{
+				  dispatch({
+			  				type:FETCH_MESSAGES, 
+			  				payload:res.data.message
+				  		});
+			  })
+			 .catch( res=>{
+			 	  console.log(res);
+			  });
+	}
+}
